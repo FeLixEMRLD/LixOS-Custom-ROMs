@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LixOS Header Fix</title>
+    <title>LixOS Minimal Header</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,11 +15,13 @@
             margin: 0;
             padding: 0;
             background-color: #ffffff;
+            color: #000000;
         }
 
+        /* The main container with the bottom divider */
         .site-header {
-            border-bottom: 1.5px solid #000000;
-            padding: 15px 50px;
+            border-bottom: 2px solid #000000;
+            padding: 10px 50px; /* Adjust side padding as needed */
             width: 100%;
             box-sizing: border-box;
         }
@@ -27,65 +29,48 @@
         .header-content {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end; /* Keeps text aligned to the bottom line */
         }
 
-        /* --- Logo Section --- */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .text-stack {
+        /* --- Title Group --- */
+        .title-group {
             display: flex;
             flex-direction: column;
             line-height: 1.1;
         }
 
-        .sub-text {
-            font-size: 14px; /* Scaled down for accuracy */
+        .sub-title {
+            font-size: 16px;
             margin: 0;
+            letter-spacing: 0.5px;
         }
 
-        .main-text {
-            font-size: 38px; /* Compact title size */
+        .main-title {
+            font-size: 42px;
             font-weight: 500;
             margin: 0;
-            letter-spacing: -1px;
+            margin-top: -2px; /* Pulls the title closer to the sub-title */
         }
-
-        /* Restored 3-Square stepped logo */
-        .graphic-box {
-            position: relative;
-            width: 50px;
-            height: 50px;
-        }
-
-        .square {
-            position: absolute;
-            width: 28px;
-            height: 28px;
-            background-color: rgba(0, 0, 0, 0.12); /* Subtle transparency */
-        }
-
-        .sq-1 { top: 0; left: 0; }        /* Top Left */
-        .sq-2 { top: 11px; left: 11px; }  /* Middle Offset */
-        .sq-3 { top: 22px; left: 22px; }  /* Bottom Right */
 
         /* --- Navigation --- */
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 35px;
+            gap: 40px;
             margin: 0;
             padding: 0;
+            padding-bottom: 8px; /* Aligns menu horizontally with the main title */
         }
 
         .nav-links li a {
             text-decoration: none;
             color: #000000;
-            font-size: 18px;
+            font-size: 22px;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links li a:hover {
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -93,16 +78,9 @@
 
     <header class="site-header">
         <div class="header-content">
-            <div class="logo-container">
-                <div class="text-stack">
-                    <span class="sub-text">Break Static</span>
-                    <h1 class="main-text">LixOS</h1>
-                </div>
-                <div class="graphic-box">
-                    <div class="square sq-1"></div>
-                    <div class="square sq-2"></div>
-                    <div class="square sq-3"></div>
-                </div>
+            <div class="title-group">
+                <span class="sub-title">Break Static</span>
+                <h1 class="main-title">LixOS</h1>
             </div>
 
             <nav>
