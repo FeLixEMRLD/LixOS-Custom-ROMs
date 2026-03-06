@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LixOS Header</title>
+    <title>LixOS Header Fix</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -18,8 +18,8 @@
         }
 
         .site-header {
-            border-bottom: 2px solid #000000; /* Matching the thick line in the screenshot */
-            padding: 10px 40px;
+            border-bottom: 1.5px solid #000000;
+            padding: 15px 50px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -30,12 +30,11 @@
             align-items: center;
         }
 
-        /* --- Updated Logo Section --- */
-        
+        /* --- Logo Section --- */
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .text-stack {
@@ -45,50 +44,40 @@
         }
 
         .sub-text {
-            font-size: 22px; /* Large "Break Static" as seen in PPT */
+            font-size: 14px; /* Scaled down for accuracy */
             margin: 0;
         }
 
         .main-text {
-            font-size: 64px; /* Large "LixOS" title */
+            font-size: 38px; /* Compact title size */
             font-weight: 500;
             margin: 0;
-            letter-spacing: -2px;
+            letter-spacing: -1px;
         }
 
-        /* The overlapping squares graphic */
+        /* Restored 3-Square stepped logo */
         .graphic-box {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
         }
 
-        /* Shared style for both squares */
         .square {
             position: absolute;
-            width: 55px;
-            height: 55px;
-            background-color: rgba(0, 0, 0, 0.15); /* Semi-transparent grey */
+            width: 28px;
+            height: 28px;
+            background-color: rgba(0, 0, 0, 0.12); /* Subtle transparency */
         }
 
-        /* Top-right square */
-        .sq-1 {
-            top: 0;
-            right: 0;
-        }
-
-        /* Bottom-left square */
-        .sq-2 {
-            bottom: 0;
-            left: 0;
-        }
+        .sq-1 { top: 0; left: 0; }        /* Top Left */
+        .sq-2 { top: 11px; left: 11px; }  /* Middle Offset */
+        .sq-3 { top: 22px; left: 22px; }  /* Bottom Right */
 
         /* --- Navigation --- */
-        
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 35px;
             margin: 0;
             padding: 0;
         }
@@ -96,7 +85,7 @@
         .nav-links li a {
             text-decoration: none;
             color: #000000;
-            font-size: 20px;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -112,6 +101,7 @@
                 <div class="graphic-box">
                     <div class="square sq-1"></div>
                     <div class="square sq-2"></div>
+                    <div class="square sq-3"></div>
                 </div>
             </div>
 
