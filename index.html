@@ -3,148 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LixOS Website Mockup</title>
+    <title>LixOS Header</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Base page styles to create the clean white look */
         body {
-            font-family: 'Fira Mono', monospace; /* Applying the font */
+            font-family: 'Fira Mono', monospace;
             margin: 0;
             padding: 0;
             background-color: #ffffff;
-            color: #000000;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Container for the main horizontal border and structure */
         .site-header {
-            border-bottom: 1px solid #000000;
-            padding: 20px 40px; /* Padding for the entire top bar */
-            box-sizing: border-box;
+            border-bottom: 2px solid #000000; /* Matching the thick line in the screenshot */
+            padding: 10px 40px;
             width: 100%;
+            box-sizing: border-box;
         }
 
-        /* Container to align left (logo) and right (menu) elements */
         .header-content {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end; /* Aligns text baselines across the row */
+            align-items: center;
         }
 
-        /* --- Logo Section (Left Side) --- */
+        /* --- Updated Logo Section --- */
         
-        .logo-group {
+        .logo-container {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
         .text-stack {
             display: flex;
             flex-direction: column;
-            margin-right: 15px; /* Space between text and graphic */
-        }
-
-        .lixos-text {
-            font-size: 32px; /* Large LixOS text */
-            font-weight: 500; /* Regular weight */
-            line-height: 1;
-            margin: 0;
-            margin-top: -8px; /* Adjustment to match visual flow */
+            line-height: 1.1;
         }
 
         .sub-text {
-            font-size: 11px; /* Small Break Static text */
-            font-weight: 400;
-            color: #444; /* Slightly dimmer for contrast */
-            margin: 0 0 4px 0; /* Positioned just above LixOS */
+            font-size: 22px; /* Large "Break Static" as seen in PPT */
+            margin: 0;
         }
 
-        /* Replicating the pixel art square with multiple grid cells */
-        .logo-graphic {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 1px; /* Grid lines match the pattern */
+        .main-text {
+            font-size: 64px; /* Large "LixOS" title */
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: -2px;
         }
 
-        /* Pixel cells - some colored to form the X */
-        .pixel { background-color: #f1f1f1; } /* Base light grey */
-        .pixel.fill-dark { background-color: #cacaca; } /* Darker 'X' parts */
-        .pixel.fill-mid { background-color: #dadada; } /* Mid 'X' parts */
+        /* The overlapping squares graphic */
+        .graphic-box {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
 
-        /* --- Navigation Menu (Right Side) --- */
+        /* Shared style for both squares */
+        .square {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background-color: rgba(0, 0, 0, 0.15); /* Semi-transparent grey */
+        }
+
+        /* Top-right square */
+        .sq-1 {
+            top: 0;
+            right: 0;
+        }
+
+        /* Bottom-left square */
+        .sq-2 {
+            bottom: 0;
+            left: 0;
+        }
+
+        /* --- Navigation --- */
         
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 30px;
             margin: 0;
             padding: 0;
-            gap: 30px; /* Spacing between "Home", "Download", etc. */
         }
 
         .nav-links li a {
-            text-decoration: none; /* Remove underlines */
+            text-decoration: none;
             color: #000000;
-            font-size: 20px; /* Match menu text size */
-            font-weight: 400;
-            transition: color 0.2s; /* Subtle hover effect */
+            font-size: 20px;
         }
-
-        /* Add a simple visual effect when a user hovers over a link */
-        .nav-links li a:hover {
-            color: #555555;
-        }
-
     </style>
 </head>
 <body>
 
     <header class="site-header">
         <div class="header-content">
-            <div class="logo-group">
+            <div class="logo-container">
                 <div class="text-stack">
                     <span class="sub-text">Break Static</span>
-                    <h1 class="lixos-text">LixOS</h1>
+                    <h1 class="main-text">LixOS</h1>
                 </div>
-                <div class="logo-graphic">
-                    <div class="pixel"></div>
-                    <div class="pixel fill-dark"></div>
-                    <div class="pixel fill-mid"></div>
-                    <div class="pixel"></div>
-
-                    <div class="pixel fill-mid"></div>
-                    <div class="pixel fill-dark"></div>
-                    <div class="pixel fill-mid"></div>
-                    <div class="pixel"></div>
-
-                    <div class="pixel fill-mid"></div>
-                    <div class="pixel"></div>
-                    <div class="pixel"></div>
-                    <div class="pixel"></div>
-
-                    <div class="pixel fill-dark"></div>
-                    <div class="pixel"></div>
-                    <div class="pixel"></div>
-                    <div class="pixel"></div>
+                <div class="graphic-box">
+                    <div class="square sq-1"></div>
+                    <div class="square sq-2"></div>
                 </div>
             </div>
 
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#download">Download</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Download</a></li>
+                    <li><a href="#">About</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    </body>
+</body>
 </html>
