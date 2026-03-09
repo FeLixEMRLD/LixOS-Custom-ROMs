@@ -9,7 +9,7 @@
         :root {
             --bg-color: #ffffff;
             --text-color: #000000;
-            /* Flat linear gradient per your PowerPoint reference */
+            /* Linear gradient from your reference image */
             --sphere-gradient: linear-gradient(135deg, #adadad 0%, #000000 100%);
         }
 
@@ -23,10 +23,9 @@
             font-family: 'Fira Mono', monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
-            /* Overflow-y: auto allows vertical scrolling */
-            overflow-y: auto; 
+            overflow-y: auto;
             overflow-x: hidden;
-            min-height: 200vh; /* Added extra height to demonstrate scrolling */
+            min-height: 200vh; /* Keeps the page scrollable */
         }
 
         /* Navigation */
@@ -34,11 +33,11 @@
             display: flex;
             justify-content: flex-end;
             padding: 30px 60px;
-            position: sticky; /* Stays at the top while you scroll */
+            position: fixed; /* Header stays at the top of the screen */
+            width: 100%;
             top: 0;
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid #eee;
             z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
         }
 
         nav a {
@@ -50,12 +49,16 @@
 
         /* Main UI Container */
         .hero-section {
-            height: calc(100vh - 85px); /* Full height minus header */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            position: relative;
+        }
+
+        .hero-text {
             position: relative;
             z-index: 10;
         }
@@ -80,51 +83,62 @@
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
+            display: inline-block;
         }
 
         .btn:hover {
             transform: scale(1.05);
+            background-color: #333;
         }
 
-        /* Fixed Spheres - Static Positions */
+        /* Fixed Hovering Spheres */
         .sphere {
-            position: absolute;
+            position: fixed; /* Stays in the viewport while scrolling */
             border-radius: 50%;
             background: var(--sphere-gradient);
             z-index: 1;
-            pointer-events: none; /* Allows clicking "through" them if needed */
+            pointer-events: none;
         }
 
-        /* Top Left - Matches your layout */
+        /* Top Left - Small */
         .s1 {
-            width: 340px;
-            height: 340px;
+            width: 180px;
+            height: 180px;
             top: 15%;
-            left: 8%;
+            left: 10%;
+            animation: hover-slow 8s ease-in-out infinite alternate;
         }
 
         /* Bottom Left - Large */
         .s2 {
-            width: 500px;
-            height: 500px;
-            bottom: -5%;
-            left: -10%;
+            width: 550px;
+            height: 550px;
+            bottom: -100px;
+            left: -100px;
+            animation: hover-slow 12s ease-in-out infinite alternate-reverse;
         }
 
-        /* Bottom Right - Large */
+        /* Bottom Right - Medium */
         .s3 {
-            width: 480px;
-            height: 480px;
-            bottom: -5%;
-            right: -5%;
+            width: 380px;
+            height: 380px;
+            bottom: -50px;
+            right: -50px;
+            animation: hover-slow 10s ease-in-out infinite alternate;
         }
 
-        /* Placeholder for scrollable content */
+        /* Hovering Animation */
+        @keyframes hover-slow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 40px); }
+        }
+
         .content-block {
             padding: 100px 10%;
-            font-size: 1.5rem;
-            line-height: 1.6;
+            position: relative;
+            z-index: 10;
+            background: white; /* Optional: hides balls as you scroll into content */
         }
 
     </style>
@@ -139,11 +153,11 @@
         </nav>
     </header>
 
-    <section class="hero-section">
-        <div class="sphere s1"></div>
-        <div class="sphere s2"></div>
-        <div class="sphere s3"></div>
+    <div class="sphere s1"></div>
+    <div class="sphere s2"></div>
+    <div class="sphere s3"></div>
 
+    <section class="hero-section">
         <div class="hero-text">
             <p class="subtitle">Break Static</p>
             <h1 class="title">LixOS</h1>
@@ -152,8 +166,8 @@
     </section>
 
     <section id="about" class="content-block">
-        <h2>About LixOS</h2>
-        <p>This page is now scrollable. You can add more sections, information, or downloads here. The background spheres remain in their original design positions within the hero section.</p>
+        <h2>Scroll to explore</h2>
+        <p>The background spheres now stay fixed in their sectors with a subtle hovering effect. The sizes are now Small (Top-Left), Large (Bottom-Left), and Medium (Bottom-Right) to match your requirements.</p>
     </section>
 
 </body>
