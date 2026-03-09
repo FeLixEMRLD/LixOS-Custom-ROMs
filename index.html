@@ -9,6 +9,7 @@
         :root {
             --bg-color: #ffffff;
             --text-color: #000000;
+            /* Flat linear gradient per your PowerPoint reference */
             --sphere-gradient: linear-gradient(135deg, #adadad 0%, #000000 100%);
         }
 
@@ -22,11 +23,10 @@
             font-family: 'Fira Mono', monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            /* Overflow-y: auto allows vertical scrolling */
+            overflow-y: auto; 
+            overflow-x: hidden;
+            min-height: 200vh; /* Added extra height to demonstrate scrolling */
         }
 
         /* Navigation */
@@ -34,8 +34,11 @@
             display: flex;
             justify-content: flex-end;
             padding: 30px 60px;
-            position: relative;
-            z-index: 10;
+            position: sticky; /* Stays at the top while you scroll */
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #eee;
+            z-index: 100;
         }
 
         nav a {
@@ -45,9 +48,9 @@
             font-size: 1.2rem;
         }
 
-        /* Main UI */
-        main {
-            flex: 1;
+        /* Main UI Container */
+        .hero-section {
+            height: calc(100vh - 85px); /* Full height minus header */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -67,6 +70,7 @@
             font-size: 8rem;
             font-weight: 400;
             margin-bottom: 3rem;
+            line-height: 1;
         }
 
         .btn {
@@ -76,60 +80,51 @@
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: opacity 0.2s;
+            transition: transform 0.2s;
         }
 
         .btn:hover {
-            opacity: 0.8;
+            transform: scale(1.05);
         }
 
-        /* Spheres - Flat Gradients */
+        /* Fixed Spheres - Static Positions */
         .sphere {
             position: absolute;
             border-radius: 50%;
             background: var(--sphere-gradient);
             z-index: 1;
+            pointer-events: none; /* Allows clicking "through" them if needed */
         }
 
-        /* Top Left - Medium */
+        /* Top Left - Matches your layout */
         .s1 {
-            width: 320px;
-            height: 320px;
-            top: 10%;
-            left: 5%;
-            animation: drift-tl 12s ease-in-out infinite alternate;
+            width: 340px;
+            height: 340px;
+            top: 15%;
+            left: 8%;
         }
 
         /* Bottom Left - Large */
         .s2 {
+            width: 500px;
+            height: 500px;
+            bottom: -5%;
+            left: -10%;
+        }
+
+        /* Bottom Right - Large */
+        .s3 {
             width: 480px;
             height: 480px;
-            bottom: -10%;
-            left: -5%;
-            animation: drift-bl 15s ease-in-out infinite alternate;
+            bottom: -5%;
+            right: -5%;
         }
 
-        /* Bottom Right - Small/Medium */
-        .s3 {
-            width: 280px;
-            height: 280px;
-            bottom: 5%;
-            right: 5%;
-            animation: drift-br 10s ease-in-out infinite alternate;
-        }
-
-        /* Movement without overlapping center text */
-        @keyframes drift-tl {
-            from { transform: translate(0, 0); }
-            to { transform: translate(20px, 30px); }
-        }
-        @keyframes drift-bl {
-            from { transform: translate(0, 0); }
-            to { transform: translate(15px, -20px); }
-        }
-        @keyframes drift-br {
-            from { transform: translate(0, 0); }
-            to { transform: translate(-30px, -10px); }
+        /* Placeholder for scrollable content */
+        .content-block {
+            padding: 100px 10%;
+            font-size: 1.5rem;
+            line-height: 1.6;
         }
 
     </style>
@@ -139,20 +134,27 @@
     <header>
         <nav>
             <a href="#">Home</a>
-            <a href="#">Download</a>
-            <a href="#">About</a>
+            <a href="#download">Download</a>
+            <a href="#about">About</a>
         </nav>
     </header>
 
-    <div class="sphere s1"></div>
-    <div class="sphere s2"></div>
-    <div class="sphere s3"></div>
+    <section class="hero-section">
+        <div class="sphere s1"></div>
+        <div class="sphere s2"></div>
+        <div class="sphere s3"></div>
 
-    <main>
-        <p class="subtitle">Break Static</p>
-        <h1 class="title">LixOS</h1>
-        <a href="#" class="btn">Get for your device</a>
-    </main>
+        <div class="hero-text">
+            <p class="subtitle">Break Static</p>
+            <h1 class="title">LixOS</h1>
+            <a href="#" class="btn">Get for your device</a>
+        </div>
+    </section>
+
+    <section id="about" class="content-block">
+        <h2>About LixOS</h2>
+        <p>This page is now scrollable. You can add more sections, information, or downloads here. The background spheres remain in their original design positions within the hero section.</p>
+    </section>
 
 </body>
 </html>
