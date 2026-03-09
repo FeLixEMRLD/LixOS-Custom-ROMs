@@ -9,7 +9,6 @@
         :root {
             --bg-color: #ffffff;
             --text-color: #000000;
-            /* Linear gradient from your reference image */
             --sphere-gradient: linear-gradient(135deg, #adadad 0%, #000000 100%);
         }
 
@@ -25,7 +24,7 @@
             color: var(--text-color);
             overflow-y: auto;
             overflow-x: hidden;
-            min-height: 200vh; /* Keeps the page scrollable */
+            min-height: 200vh;
         }
 
         /* Navigation */
@@ -33,11 +32,10 @@
             display: flex;
             justify-content: flex-end;
             padding: 30px 60px;
-            position: fixed; /* Header stays at the top of the screen */
+            position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.8);
         }
 
         nav a {
@@ -45,6 +43,14 @@
             color: var(--text-color);
             margin-left: 40px;
             font-size: 1.2rem;
+            transition: all 0.3s ease; /* Hover transition */
+            border-bottom: 2px solid transparent;
+        }
+
+        /* Link Hover Effect */
+        nav a:hover {
+            color: #666;
+            border-bottom: 2px solid #666;
         }
 
         /* Main UI Container */
@@ -76,6 +82,7 @@
             line-height: 1;
         }
 
+        /* Button Hover Effect */
         .btn {
             background: #000;
             color: #fff;
@@ -83,18 +90,21 @@
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-block;
+            border: 2px solid #000;
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            background-color: #333;
+            background-color: #ffffff;
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        /* Fixed Hovering Spheres */
+        /* Static Spheres - No Animation */
         .sphere {
-            position: fixed; /* Stays in the viewport while scrolling */
+            position: fixed;
             border-radius: 50%;
             background: var(--sphere-gradient);
             z-index: 1;
@@ -107,7 +117,6 @@
             height: 180px;
             top: 15%;
             left: 10%;
-            animation: hover-slow 8s ease-in-out infinite alternate;
         }
 
         /* Bottom Left - Large */
@@ -116,7 +125,6 @@
             height: 550px;
             bottom: -100px;
             left: -100px;
-            animation: hover-slow 12s ease-in-out infinite alternate-reverse;
         }
 
         /* Bottom Right - Medium */
@@ -125,20 +133,14 @@
             height: 380px;
             bottom: -50px;
             right: -50px;
-            animation: hover-slow 10s ease-in-out infinite alternate;
-        }
-
-        /* Hovering Animation */
-        @keyframes hover-slow {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(30px, 40px); }
         }
 
         .content-block {
             padding: 100px 10%;
             position: relative;
             z-index: 10;
-            background: white; /* Optional: hides balls as you scroll into content */
+            background: white;
+            min-height: 100vh;
         }
 
     </style>
@@ -166,8 +168,8 @@
     </section>
 
     <section id="about" class="content-block">
-        <h2>Scroll to explore</h2>
-        <p>The background spheres now stay fixed in their sectors with a subtle hovering effect. The sizes are now Small (Top-Left), Large (Bottom-Left), and Medium (Bottom-Right) to match your requirements.</p>
+        <h2>Scrollable Page Content</h2>
+        <p>The spheres are now completely static. The hover effects are applied to the "Home, Download, About" links and the "Get for your device" button.</p>
     </section>
 
 </body>
