@@ -24,7 +24,7 @@
             color: var(--text-color);
             overflow-y: auto;
             overflow-x: hidden;
-            min-height: 200vh;
+            min-height: 100vh;
         }
 
         /* Navigation */
@@ -42,18 +42,15 @@
             text-decoration: none;
             color: var(--text-color);
             margin-left: 40px;
-            font-size: 1.2rem;
-            transition: all 0.3s ease; /* Hover transition */
-            border-bottom: 2px solid transparent;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
         }
 
-        /* Link Hover Effect */
         nav a:hover {
-            color: #666;
-            border-bottom: 2px solid #666;
+            opacity: 0.5;
         }
 
-        /* Main UI Container */
+        /* Hero Section */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -62,6 +59,7 @@
             align-items: center;
             text-align: center;
             position: relative;
+            padding: 20px;
         }
 
         .hero-text {
@@ -78,11 +76,11 @@
         .title {
             font-size: 8rem;
             font-weight: 400;
-            margin-bottom: 3rem;
-            line-height: 1;
+            margin-bottom: 2.5rem;
+            line-height: 0.9;
         }
 
-        /* Button Hover Effect */
+        /* Button & Hover */
         .btn {
             background: #000;
             color: #fff;
@@ -90,19 +88,16 @@
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-block;
-            border: 2px solid #000;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .btn:hover {
-            background-color: #ffffff;
-            color: #000000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: scale(1.05);
+            background-color: #333;
         }
 
-        /* Static Spheres - No Animation */
+        /* Spheres (Desktop sizes) */
         .sphere {
             position: fixed;
             border-radius: 50%;
@@ -111,38 +106,57 @@
             pointer-events: none;
         }
 
-        /* Top Left - Small */
-        .s1 {
-            width: 180px;
-            height: 180px;
-            top: 15%;
-            left: 10%;
-        }
+        .s1 { width: 220px; height: 220px; top: 15%; left: 10%; }
+        .s2 { width: 550px; height: 550px; bottom: -100px; left: -100px; }
+        .s3 { width: 400px; height: 400px; bottom: -50px; right: -50px; }
 
-        /* Bottom Left - Large */
-        .s2 {
-            width: 550px;
-            height: 550px;
-            bottom: -100px;
-            left: -100px;
-        }
+        /* --- MOBILE COMPATIBILITY --- */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+                justify-content: center;
+            }
 
-        /* Bottom Right - Medium */
-        .s3 {
-            width: 380px;
-            height: 380px;
-            bottom: -50px;
-            right: -50px;
-        }
+            nav a {
+                margin: 0 15px;
+                font-size: 1rem;
+            }
 
-        .content-block {
-            padding: 100px 10%;
-            position: relative;
-            z-index: 10;
-            background: white;
-            min-height: 100vh;
-        }
+            .title {
+                font-size: 4.5rem; /* Shrunk for mobile screens */
+            }
 
+            .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+
+            /* Adjust spheres so they don't drown out the UI on mobile */
+            .s1 {
+                width: 120px;
+                height: 120px;
+                top: 20%;
+                left: 5%;
+            }
+
+            .s2 {
+                width: 250px;
+                height: 250px;
+                bottom: -50px;
+                left: -50px;
+            }
+
+            .s3 {
+                width: 200px;
+                height: 200px;
+                bottom: 10%;
+                right: -40px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -150,8 +164,8 @@
     <header>
         <nav>
             <a href="#">Home</a>
-            <a href="#download">Download</a>
-            <a href="#about">About</a>
+            <a href="#">Download</a>
+            <a href="#">About</a>
         </nav>
     </header>
 
@@ -165,11 +179,6 @@
             <h1 class="title">LixOS</h1>
             <a href="#" class="btn">Get for your device</a>
         </div>
-    </section>
-
-    <section id="about" class="content-block">
-        <h2>Scrollable Page Content</h2>
-        <p>The spheres are now completely static. The hover effects are applied to the "Home, Download, About" links and the "Get for your device" button.</p>
     </section>
 
 </body>
