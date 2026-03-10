@@ -1,163 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LixOS | Break Static</title>
-<style>
-  /* --- Base Styles --- */
-  body, html {
-    margin: 0;
-    padding: 0;
-    font-family: "Courier New", Courier, monospace; /* Closest standard font to your screenshot */
-    color: #000;
-    background-color: #fff;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LixOS | Break Static</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Fira Mono', monospace;
+            background-color: #ffffff;
+            color: #000;
+            overflow-x: hidden;
+        }
 
-  /* --- Background Shapes --- */
-  .bg-shapes-container {
-    position: fixed; /* Keeps shapes in place while scrolling */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1; /* Keeps them behind the text */
-    pointer-events: none; /* Allows you to click through them */
-  }
+        /* --- Background Shapes (No cutting) --- */
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7a7a7a, #2b2b2b);
+            z-index: 0;
+            filter: blur(2px);
+        }
 
-  .shape {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #888888, #222222);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* The blur/shadow effect */
-  }
+        /* Adjusted positions to keep them inside the viewport */
+        .c1 { width: 300px; height: 300px; top: 10%; left: 5%; }
+        .c2 { width: 200px; height: 200px; bottom: 15%; left: 15%; }
+        .c3 { width: 350px; height: 350px; bottom: 5%; right: 5%; }
 
-  /* Positioned to stay fully within the screen */
-  .shape-1 {
-    width: 300px;
-    height: 300px;
-    top: 15%;
-    left: 8%; 
-  }
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 40px 60px;
+            display: flex;
+            gap: 40px;
+            z-index: 10;
+        }
 
-  .shape-2 {
-    width: 180px;
-    height: 180px;
-    bottom: 12%;
-    left: 22%;
-  }
+        nav a {
+            text-decoration: none;
+            color: #000;
+            font-size: 1.1rem;
+        }
 
-  .shape-3 {
-    width: 320px;
-    height: 320px;
-    bottom: 10%;
-    right: 8%;
-  }
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            z-index: 5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-  /* --- Navigation --- */
-  nav {
-    display: flex;
-    justify-content: flex-end;
-    padding: 2rem 4rem;
-    position: fixed;
-    width: 100%;
-    box-sizing: border-box;
-    top: 0;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.9); /* Slight white background to make text readable when scrolling */
-    backdrop-filter: blur(5px);
-  }
+        .hero h2 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin: 0;
+        }
 
-  nav a {
-    text-decoration: none;
-    color: #000;
-    margin-left: 3rem;
-    font-size: 1.1rem;
-  }
+        .hero h1 {
+            font-size: 7rem;
+            font-weight: 500;
+            margin: 10px 0 40px 0;
+        }
 
-  /* --- Hero Section --- */
-  .hero {
-    height: 100vh; /* Takes up the full height of the screen */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+        /* --- The Button + Invert Hover --- */
+        .btn {
+            background: #000;
+            color: #fff;
+            padding: 16px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border: 2px solid #000;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
 
-  .hero h2 {
-    font-size: 2rem;
-    font-weight: normal;
-    margin: 0;
-    letter-spacing: 2px;
-  }
+        .btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
-  .hero h1 {
-    font-size: 6rem;
-    margin: 0.5rem 0 2rem;
-    letter-spacing: 5px;
-  }
-
-  .download-btn {
-    background-color: #000;
-    color: #fff;
-    padding: 1rem 2.5rem;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  /* --- Secondary Content Section --- */
-  .content-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff; /* Solid background so it covers the shapes when you scroll down */
-    position: relative;
-    z-index: 1;
-    text-align: center;
-  }
-
-  .content-section h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-</style>
+        .download-section {
+            position: relative;
+            z-index: 5;
+            background: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="bg-shapes-container">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-  </div>
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
 
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Download</a>
-    <a href="#">About</a>
-  </nav>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Download</a>
+        <a href="#">About</a>
+    </nav>
 
-  <div class="hero">
-    <h2>Break Static</h2>
-    <h1>LixOS</h1>
-    <a href="#" class="download-btn">Get for your device</a>
-  </div>
+    <div class="hero">
+        <h2>Break Static</h2>
+        <h1>LixOS</h1>
+        <a href="#" class="btn">Get for your device</a>
+    </div>
 
-  <div class="content-section">
-    <h3>Download Section</h3>
-    <p>Watch the header above—it stays fixed while the content moves.</p>
-  </div>
+    <div class="download-section">
+        <h2>Download Section</h2>
+        <p>Watch the header above—it stays fixed while the content moves.</p>
+    </div>
 
 </body>
 </html>
