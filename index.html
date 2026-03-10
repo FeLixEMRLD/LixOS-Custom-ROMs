@@ -1,175 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LixOS | Break Static</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --sphere-gradient: linear-gradient(135deg, #adadad 0%, #000000 100%);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LixOS | Break Static</title>
+<style>
+  /* --- Base Styles --- */
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Courier New", Courier, monospace; /* Closest standard font to your screenshot */
+    color: #000;
+    background-color: #fff;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            touch-action: pan-y;
-        }
+  /* --- Background Shapes --- */
+  .bg-shapes-container {
+    position: fixed; /* Keeps shapes in place while scrolling */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Keeps them behind the text */
+    pointer-events: none; /* Allows you to click through them */
+  }
 
-        body {
-            font-family: 'Fira Mono', monospace;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            overflow-y: auto;
-            min-height: 100vh;
-        }
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #888888, #222222);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* The blur/shadow effect */
+  }
 
-        /* Navigation - Now STATIC (Fixed) when scrolling */
-        header {
-            display: flex;
-            justify-content: flex-end;
-            padding: 30px 60px;
-            position: fixed; /* Stays in place */
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            /* Optional: subtle background to keep links readable over spheres */
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px); 
-        }
+  /* Positioned to stay fully within the screen */
+  .shape-1 {
+    width: 300px;
+    height: 300px;
+    top: 15%;
+    left: 8%; 
+  }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            margin-left: 40px;
-            font-size: 1.1rem;
-            transition: opacity 0.3s ease;
-        }
+  .shape-2 {
+    width: 180px;
+    height: 180px;
+    bottom: 12%;
+    left: 22%;
+  }
 
-        nav a:hover { opacity: 0.5; }
+  .shape-3 {
+    width: 320px;
+    height: 320px;
+    bottom: 10%;
+    right: 8%;
+  }
 
-        /* Main Section */
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
+  /* --- Navigation --- */
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem 4rem;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9); /* Slight white background to make text readable when scrolling */
+    backdrop-filter: blur(5px);
+  }
 
-        .hero-text {
-            position: relative;
-            z-index: 10;
-            transform: translateY(-5vh); /* Lifted from center */
-        }
+  nav a {
+    text-decoration: none;
+    color: #000;
+    margin-left: 3rem;
+    font-size: 1.1rem;
+  }
 
-        .subtitle {
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin-bottom: 0.2rem;
-        }
+  /* --- Hero Section --- */
+  .hero {
+    height: 100vh; /* Takes up the full height of the screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-        .title {
-            font-size: 8rem;
-            font-weight: 400;
-            margin-bottom: 2.5rem;
-            line-height: 0.9;
-        }
+  .hero h2 {
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 0;
+    letter-spacing: 2px;
+  }
 
-        .btn {
-            background: #000;
-            color: #fff;
-            padding: 18px 45px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border: 2px solid #000;
-        }
+  .hero h1 {
+    font-size: 6rem;
+    margin: 0.5rem 0 2rem;
+    letter-spacing: 5px;
+  }
 
-        .btn:hover {
-            background: #fff;
-            color: #000;
-        }
+  .download-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
 
-        /* Spheres - Absolute so they scroll away with content */
-        .sphere {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--sphere-gradient);
-            z-index: 1;
-            pointer-events: none;
-        }
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
 
-        .s1 { width: 250px; height: 250px; top: 12%; left: 10%; }
-        .s2 { width: 550px; height: 550px; top: 60%; left: -100px; }
-        .s3 { width: 450px; height: 450px; top: 65%; right: -100px; }
+  /* --- Secondary Content Section --- */
+  .content-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Solid background so it covers the shapes when you scroll down */
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
 
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            header {
-                justify-content: center;
-                padding: 20px 10px;
-            }
-
-            nav a {
-                margin: 0 15px;
-                font-size: 1rem;
-            }
-
-            .hero-text {
-                transform: translateY(-8vh);
-            }
-
-            .title {
-                font-size: 4.8rem;
-                margin-bottom: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1.8rem;
-            }
-
-            .s1 { width: 140px; height: 140px; top: 18%; left: 5%; }
-            .s2 { width: 280px; height: 280px; top: 75%; left: -50px; }
-            .s3 { width: 260px; height: 260px; top: 80%; right: -50px; }
-        }
-    </style>
+  .content-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#download">Download</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+  <div class="bg-shapes-container">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
 
-    <div class="sphere s1"></div>
-    <div class="sphere s2"></div>
-    <div class="sphere s3"></div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Download</a>
+    <a href="#">About</a>
+  </nav>
 
-    <section class="hero-section">
-        <div class="hero-text">
-            <p class="subtitle">Break Static</p>
-            <h1 class="title">LixOS</h1>
-            <a href="#download" class="btn">Get for your device</a>
-        </div>
-    </section>
+  <div class="hero">
+    <h2>Break Static</h2>
+    <h1>LixOS</h1>
+    <a href="#" class="download-btn">Get for your device</a>
+  </div>
 
-    <div id="download" style="height: 100vh; padding: 100px 20px; text-align: center; background: white; position: relative; z-index: 20;">
-        <h2>Download Section</h2>
-        <p style="margin-top: 20px;">Watch the header above—it stays fixed while the content moves.</p>
-    </div>
+  <div class="content-section">
+    <h3>Download Section</h3>
+    <p>Watch the header above—it stays fixed while the content moves.</p>
+  </div>
 
 </body>
 </html>
