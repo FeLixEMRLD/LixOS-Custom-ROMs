@@ -15,35 +15,43 @@
             overflow-x: hidden;
         }
 
-        /* --- Background Shapes (No cutting) --- */
+        /* --- Crisp Background Circles (No Blur) --- */
         .circle {
             position: fixed;
             border-radius: 50%;
-            background: linear-gradient(145deg, #7a7a7a, #2b2b2b);
+            background: linear-gradient(145deg, #555555, #222222);
             z-index: 0;
-            filter: blur(2px);
+            /* Filter removed so shapes stay sharp */
         }
 
-        /* Adjusted positions to keep them inside the viewport */
-        .c1 { width: 300px; height: 300px; top: 10%; left: 5%; }
-        .c2 { width: 200px; height: 200px; bottom: 15%; left: 15%; }
-        .c3 { width: 350px; height: 350px; bottom: 5%; right: 5%; }
+        /* Adjusted positions to keep them fully on screen */
+        .c1 { width: 320px; height: 320px; top: 15%; left: 5%; }
+        .c2 { width: 180px; height: 180px; bottom: 20%; left: 18%; }
+        .c3 { width: 380px; height: 380px; bottom: 10%; right: 5%; }
 
-        /* --- Navigation --- */
+        /* --- Header with Top Blur Effect --- */
         nav {
             position: fixed;
             top: 0;
-            right: 0;
-            padding: 40px 60px;
+            left: 0;
+            width: 100%;
+            padding: 30px 60px;
             display: flex;
-            gap: 40px;
-            z-index: 10;
+            justify-content: flex-end;
+            box-sizing: border-box;
+            z-index: 100;
+            /* This creates the blur effect on top of the site */
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         nav a {
             text-decoration: none;
             color: #000;
             font-size: 1.1rem;
+            margin-left: 40px;
         }
 
         /* --- Hero Section --- */
@@ -65,12 +73,12 @@
         }
 
         .hero h1 {
-            font-size: 7rem;
+            font-size: 8rem;
             font-weight: 500;
             margin: 10px 0 40px 0;
         }
 
-        /* --- The Button + Invert Hover --- */
+        /* --- Button with Hover Invert --- */
         .btn {
             background: #000;
             color: #fff;
@@ -79,21 +87,20 @@
             text-decoration: none;
             font-size: 1.1rem;
             border: 2px solid #000;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.2s ease-in-out;
         }
 
         .btn:hover {
-            background: #fff;
+            background: transparent;
             color: #000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        /* --- Content Section --- */
         .download-section {
             position: relative;
             z-index: 5;
             background: white;
-            padding: 120px 0;
+            padding: 150px 0;
             text-align: center;
         }
     </style>
@@ -117,9 +124,9 @@
     </div>
 
     <div class="download-section">
-        <h2>Download Section</h2>
-        <p>Watch the header above—it stays fixed while the content moves.</p>
-    </div>
+        <h2 id="download">Download Section</h2>
+        <p>Notice how the navigation bar blurs the shapes as they pass underneath.</p>
+        <div style="height: 1000px;"></div> </div>
 
 </body>
 </html>
