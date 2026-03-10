@@ -22,17 +22,18 @@
             font-family: 'Fira Mono', monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
+            /* Scroll enabled */
             overflow-y: auto;
             overflow-x: hidden;
-            min-height: 100vh;
+            min-height: 200vh;
         }
 
-        /* Navigation */
+        /* Navigation - Centered on Mobile, Right on Desktop */
         header {
             display: flex;
             justify-content: flex-end;
             padding: 30px 60px;
-            position: fixed;
+            position: absolute; /* Changed from fixed to allow it to move with initial scroll */
             width: 100%;
             top: 0;
             z-index: 100;
@@ -46,41 +47,39 @@
             transition: opacity 0.3s ease;
         }
 
-        nav a:hover {
-            opacity: 0.5;
-        }
+        nav a:hover { opacity: 0.5; }
 
-        /* Hero Section */
+        /* Hero Section - Centering Logic */
         .hero-section {
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Vertical center */
+            align-items: center;     /* Horizontal center */
             text-align: center;
             position: relative;
-            padding: 20px;
+            padding-bottom: 5vh;    /* Slightly lifts the content up */
         }
 
         .hero-text {
             position: relative;
             z-index: 10;
+            width: 100%;
         }
 
         .subtitle {
             font-size: 2.5rem;
             font-weight: 400;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
         }
 
         .title {
             font-size: 8rem;
             font-weight: 400;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             line-height: 0.9;
         }
 
-        /* Button & Hover */
         .btn {
             background: #000;
             color: #fff;
@@ -89,32 +88,34 @@
             text-decoration: none;
             font-size: 1.2rem;
             display: inline-block;
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            transition: all 0.3s ease;
+            border: 2px solid #000;
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            background-color: #333;
+            background: #fff;
+            color: #000;
         }
 
-        /* Spheres (Desktop sizes) */
+        /* Spheres */
         .sphere {
-            position: fixed;
+            position: absolute; /* Follows scroll */
             border-radius: 50%;
             background: var(--sphere-gradient);
             z-index: 1;
             pointer-events: none;
         }
 
-        .s1 { width: 220px; height: 220px; top: 15%; left: 10%; }
-        .s2 { width: 550px; height: 550px; bottom: -100px; left: -100px; }
-        .s3 { width: 400px; height: 400px; bottom: -50px; right: -50px; }
+        /* Desktop Positions */
+        .s1 { width: 250px; height: 250px; top: 10%; left: 10%; }
+        .s2 { width: 550px; height: 550px; top: 60%; left: -150px; }
+        .s3 { width: 450px; height: 450px; top: 65%; right: -100px; }
 
-        /* --- MOBILE COMPATIBILITY --- */
+        /* --- MOBILE FIXES --- */
         @media (max-width: 768px) {
             header {
-                padding: 20px;
                 justify-content: center;
+                padding: 40px 10px;
             }
 
             nav a {
@@ -122,40 +123,23 @@
                 font-size: 1rem;
             }
 
+            .hero-section {
+                padding-bottom: 15vh; /* Lifts logo/button higher on small screens */
+            }
+
             .title {
-                font-size: 4.5rem; /* Shrunk for mobile screens */
+                font-size: 4.8rem;
+                margin-bottom: 1.5rem;
             }
 
             .subtitle {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
 
-            .btn {
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-
-            /* Adjust spheres so they don't drown out the UI on mobile */
-            .s1 {
-                width: 120px;
-                height: 120px;
-                top: 20%;
-                left: 5%;
-            }
-
-            .s2 {
-                width: 250px;
-                height: 250px;
-                bottom: -50px;
-                left: -50px;
-            }
-
-            .s3 {
-                width: 200px;
-                height: 200px;
-                bottom: 10%;
-                right: -40px;
-            }
+            /* Adjust spheres for mobile layout */
+            .s1 { width: 150px; height: 150px; top: 15%; left: 5%; }
+            .s2 { width: 300px; height: 300px; top: 75%; left: -80px; }
+            .s3 { width: 280px; height: 280px; top: 80%; right: -80px; }
         }
     </style>
 </head>
@@ -180,6 +164,11 @@
             <a href="#" class="btn">Get for your device</a>
         </div>
     </section>
+
+    <div style="height: 100vh; padding: 50px; text-align: center;">
+        <h2 id="download">Scroll Down Content</h2>
+        <p style="margin-top: 20px;">Scrolling is now active. You can place your download links or about info here.</p>
+    </div>
 
 </body>
 </html>
