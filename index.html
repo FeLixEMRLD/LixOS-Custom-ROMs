@@ -16,8 +16,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Extra safety to prevent accidental horizontal shifts */
-            touch-action: pan-y; 
+            touch-action: pan-y;
         }
 
         body {
@@ -29,15 +28,19 @@
             min-height: 100vh;
         }
 
-        /* Navigation */
+        /* Navigation - Now STATIC (Fixed) when scrolling */
         header {
             display: flex;
             justify-content: flex-end;
             padding: 30px 60px;
-            position: absolute;
+            position: fixed; /* Stays in place */
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 100;
+            /* Optional: subtle background to keep links readable over spheres */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px); 
         }
 
         nav a {
@@ -50,13 +53,13 @@
 
         nav a:hover { opacity: 0.5; }
 
-        /* Centered Hero Section */
+        /* Main Section */
         .hero-section {
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Vertical Center */
-            align-items: center;     /* Horizontal Center */
+            justify-content: center;
+            align-items: center;
             text-align: center;
             position: relative;
         }
@@ -64,8 +67,7 @@
         .hero-text {
             position: relative;
             z-index: 10;
-            /* Slight upward shift to visually balance the "logo" area */
-            transform: translateY(-5vh); 
+            transform: translateY(-5vh); /* Lifted from center */
         }
 
         .subtitle {
@@ -98,7 +100,7 @@
             color: #000;
         }
 
-        /* Static Background Spheres */
+        /* Spheres - Absolute so they scroll away with content */
         .sphere {
             position: absolute;
             border-radius: 50%;
@@ -107,16 +109,15 @@
             pointer-events: none;
         }
 
-        /* Positions based on your layout */
         .s1 { width: 250px; height: 250px; top: 12%; left: 10%; }
-        .s2 { width: 550px; height: 550px; bottom: -5%; left: -10%; }
-        .s3 { width: 450px; height: 450px; bottom: 5%; right: -5%; }
+        .s2 { width: 550px; height: 550px; top: 60%; left: -100px; }
+        .s3 { width: 450px; height: 450px; top: 65%; right: -100px; }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
             header {
                 justify-content: center;
-                padding: 40px 10px;
+                padding: 20px 10px;
             }
 
             nav a {
@@ -125,7 +126,7 @@
             }
 
             .hero-text {
-                transform: translateY(-8vh); /* Lifts content higher on mobile */
+                transform: translateY(-8vh);
             }
 
             .title {
@@ -137,10 +138,9 @@
                 font-size: 1.8rem;
             }
 
-            /* Scaled spheres for mobile */
             .s1 { width: 140px; height: 140px; top: 18%; left: 5%; }
-            .s2 { width: 300px; height: 300px; bottom: 15%; left: -10%; }
-            .s3 { width: 280px; height: 280px; bottom: 5%; right: -10%; }
+            .s2 { width: 280px; height: 280px; top: 75%; left: -50px; }
+            .s3 { width: 260px; height: 260px; top: 80%; right: -50px; }
         }
     </style>
 </head>
@@ -149,8 +149,8 @@
     <header>
         <nav>
             <a href="#">Home</a>
-            <a href="#">Download</a>
-            <a href="#">About</a>
+            <a href="#download">Download</a>
+            <a href="#about">About</a>
         </nav>
     </header>
 
@@ -162,13 +162,13 @@
         <div class="hero-text">
             <p class="subtitle">Break Static</p>
             <h1 class="title">LixOS</h1>
-            <a href="#" class="btn">Get for your device</a>
+            <a href="#download" class="btn">Get for your device</a>
         </div>
     </section>
 
-    <div style="height: 100vh; background: #fff; position: relative; z-index: 20; padding: 100px 20px; text-align: center;">
+    <div id="download" style="height: 100vh; padding: 100px 20px; text-align: center; background: white; position: relative; z-index: 20;">
         <h2>Download Section</h2>
-        <p style="margin-top: 20px;">Scrolling is enabled. Content below the hero will appear here.</p>
+        <p style="margin-top: 20px;">Watch the header above—it stays fixed while the content moves.</p>
     </div>
 
 </body>
